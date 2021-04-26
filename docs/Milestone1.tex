@@ -49,7 +49,7 @@
 
 \title{CSE 563 Final Project Milestone 1 Report}
 \author{Chris Barnes, Eric Neblock, Linghan Zhu}
-\date{April, 25, 2020
+\date{April, 25, 2020}
 
 \begin{document}
 \maketitle
@@ -58,12 +58,20 @@
 %\lstlistoflistings
 \newpage
 \section{Overview}
-The goal of this project is to design and layout of a modified RSA algorithm to encrypt a single byte given an encryption key. In addition, we are to test how fast we are able to run our chip and provide an analysis.
+The goal of this project is to design and layout of a modified RSA algorithm to
+encrypt a single byte given an encryption key. In addition, we are to test how 
+fast we are able to run our chip and provide an analysis.
 
 \section{Block Diagram and Timing}
-As an idea, we present the following Block Diagram and Timing Diagram\ref{fig:TimingDiagram} to illustrate how we expect the process to play out.
+As an idea, we present the following Block Diagram and Timing 
+Diagram\ref{fig:TimingDiagram} to illustrate how we expect the process to play 
+out.
 
-From our timing diagram\ref{fig:TimingDiagram}, we have a constant clock as well as an enable line. When Enable is high, our process moves along a pipeline each clock cycle until completion where our output becomes valid. The various Key# represent the different bits of the input key, likewise for Input and Output, with high being a logic 1 and low being a logic 0.
+From our timing diagram\ref{fig:TimingDiagram}, we have a constant clock as well
+as an enable line. When Enable is high, our process moves along a pipeline each
+clock cycle until completion where our output becomes valid. The various Key\# 
+represent the different bits of the input key, likewise for Input and Output, 
+with high being a logic 1 and low being a logic 0.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{../img/TimingDiagram_Milestone1.png}
@@ -75,12 +83,26 @@ From our timing diagram\ref{fig:TimingDiagram}, we have a constant clock as well
 From our block diagram\ref{fig:BlockDiagram}, we have several stages as explained:
 
 \begin{enumerate}
-\item
+  \item Key generation to $Shift(P10)$ and $Shift_{3}(P(10))$
+  \item Key generation finish
+  \item $P(IP)$
+  \item $EP(R)$
+  \item $EP(R) \oplus key1$
+  \item $SBoxes(EP(R) \oplus key1)$
+  \item $P4(SBoxes(EP(R) \oplus key1))$
+  \item $SW(EP(R) \oplus key1)$
+  \item $EP(R)$
+  \item $EP(R) \oplus key2$
+  \item $SBoxes(EP(R) \oplus key2)$
+  \item $P4(SBoxes(EP(R) \oplus key2))$
+  \item $IP^{-1}(R,L)$
+  \item Put it out on the line.
 \end{enumerate}
 
+
 \begin{figure}
-  \includegraphics[width=\linewidth]{../img/BlockDiagram_Milestone1.png}
+  \includegraphics[width=\linewidth]{../img/TimingDiagram_Milestone1.png}
   \caption{Expected Block Diagram}
   \label{fig:BlockDiagram}
 \end{figure}
-
+\end{document}
